@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Venda</title>
+</head>
+
+<body>
+
+    <h1>Registro de Venda</h1>
+
+    <label>Nome do cliente:</label>
+    <input type="text" id="cliente">
+    <br><br>
+
+    <label>Nome do produto:</label>
+    <input type="text" id="produto">
+    <br><br>
+
+    <label>Preço unitário:</label>
+    <input type="number" id="preco" step="0.01">
+    <br><br>
+
+    <label>Quantidade:</label>
+    <input type="number" id="quantidade">
+    <br><br>
+
+    <label>Desconto (%):</label>
+    <input type="number" id="desconto" step="0.01">
+    <br><br>
+
+    <label>Valor pago pelo cliente:</label>
+    <input type="number" id="valorPago" step="0.01">
+    <br><br>
+
+    <button onclick="calcularVenda()">Calcular</button>
+
+    <h2>Resumo da Compra</h2>
+
+    <div id="resultado"></div>
+
+    <script>
+        function calcularVenda() {
+
+            let cliente = document.getElementById("cliente").value;
+            let produto = document.getElementById("produto").value;
+            let preco = parseFloat(document.getElementById("preco").value);
+            let quantidade = parseInt(document.getElementById("quantidade").value);
+            let descontoPercentual = parseFloat(document.getElementById("desconto").value);
+            let valorPago = parseFloat(document.getElementById("valorPago").value);
+
+            let subtotal = preco * quantidade;
+            let desconto = subtotal * (descontoPercentual / 100);
+            let total = subtotal - desconto;
+            let troco = valorPago - total;
+
+            document.getElementById("resultado").innerHTML = `
+                <p>Cliente: ${cliente}</p>
+                <p>Produto: ${produto}</p>
+                <p>Quantidade: ${quantidade}</p>
+                <p>Preço unitário: R$ ${preco.toFixed(2)}</p>
+                <p>Subtotal: R$ ${subtotal.toFixed(2)}</p>
+                <p>Desconto: R$ ${desconto.toFixed(2)}</p>
+                <p>Total da compra: R$ ${total.toFixed(2)}</p>
+                <p>Valor pago: R$ ${valorPago.toFixed(2)}</p>
+                <p>Troco: R$ ${troco.toFixed(2)}</p>
+            `;
+        }
+    </script>
+
+</body>
+</html>
